@@ -43,3 +43,26 @@
 // =============================================================================
 
 
+function isPrime(n) {
+
+    if (n <= 1) return false;
+
+    for (let i = 2; i <= n / 2; i++) {
+        
+        if (n % i == 0) return false;
+    }
+
+    return true;
+}
+
+
+const GetUserNum = require('readline-sync');
+
+let UserNum = Number(GetUserNum.question('Enter a number: '));
+
+if (isPrime(UserNum)) {
+    console.log(`${UserNum} is a prime number.`);
+}
+else {
+    console.log(`${UserNum} is not a prime number.`);
+}
