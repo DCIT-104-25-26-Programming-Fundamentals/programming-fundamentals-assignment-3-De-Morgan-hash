@@ -50,3 +50,20 @@
 // =============================================================================
 
 
+function GradeChecker(score) {
+    
+    if (score > 100) return "Error: Score must be between 0 and 100";
+    else if (score >= 80) return "Grade A";
+    else if (score >= 70) return "Grade B";
+    else if (score >= 60) return "Grade C";
+    else if (score >= 50) return "Grade D";
+    else return "Grade F";
+}
+
+
+const GetScore = require('readline-sync');
+
+let Score = GetScore.question('Enter student score (0-100): ');
+
+console.log(GradeChecker(Score));
+
