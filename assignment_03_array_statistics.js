@@ -43,4 +43,49 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+function calcSum(numlist) {
+    let total = 0;
+
+    for (let i = 0; i < numlist.length; i++) total += numlist[i];
+    return total;
+}
+
+const calcAvg = (numlist) => (calcSum(numlist) / numlist.length)
+
+function getMin(numlist) {
+    let MIN = numlist[0];
+
+    for (let i = 0; i < numlist.length; i++) {
+        if (numlist[i] < MIN) { 
+            MIN = numlist[i];
+        }
+    }
+    return MIN;
+}
+
+function getMax(numlist) {
+    let MAX = numlist[0];
+
+    for (let i = 0; i < numlist.length; i++) {
+        if (numlist[i] > MAX) { 
+            MAX = numlist[i];
+        }
+    }
+    return MAX;
+}
+
+const readinput = require('readline-sync');
+
+let size = parseInt(readinput.question('How many numbers? '));
+
+let all_nums = [];
+
+for (let i = 0; i < size; i++) {
+    all_nums[i] = Number(readinput.question(`Enter number ${i}: `));
+}
+
+console.log(`Sum: ${calcSum(all_nums)}`);
+console.log(`Average: ${calcAvg(all_nums)}`);
+console.log(`Maximum: ${getMax(all_nums)}`);
+console.log(`Minimum: ${getMin(all_nums)}`);
 
