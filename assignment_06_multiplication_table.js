@@ -60,3 +60,42 @@
 // =============================================================================
 
 
+const readline = require('readline-sync');
+
+function print_table() {
+    let num = parseInt(readline.question('Enter a number: '));
+
+    if (isNaN(num)) {
+        console.log('Error: Please enter a valid positive integer.');
+        return;
+    }
+    
+    console.log(`Multiplication Table for ${num}:`);
+    for (let i = 1; i <= 12; i++) {
+        console.log(`${num} x ${i} = ${num * i}`);
+    }
+}
+
+
+function printNTables() {
+    let N = parseInt(readline.question('Enter a number N: '));
+
+    if (isNaN(N) || N <= 0) {
+        console.log('Error: N must be a positive integer.');
+        return;
+    }
+
+    for (let i = 1; i <= N; i++) {
+        console.log(`Mueltiplication Table for ${i}:`);
+        for (let j = 1; j <= 12; j++) {
+            console.log(`${i} x ${j} = ${i * j}`);
+        }
+        if (i < N) {
+            console.log('--------------------------');
+        }
+    }
+}
+
+
+print_table();
+printNTables();
