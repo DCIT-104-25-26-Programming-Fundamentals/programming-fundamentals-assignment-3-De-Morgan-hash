@@ -68,5 +68,123 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
-const readlineSync = require('readline-sync');
+
+const readline = require('readline-sync');
+
+function read_matrix() {
+    let rows = parseInt(readline.question('Enter number of rows: '));
+    let cols = parseInt(readline.question('Enter number of columns: '));
+
+    let matrix = [];  
+
+    for (let i = 0; i < rows; i++) {
+        let row_values = readline.question(`Enter row ${i}: `);
+        let row = row_values.split(' ').map(Number);
+        matrix.push(row);
+    }
+
+    return matrix;
+}
+
+function print_matrix(matrix) {
+    for (let i = 0; i < matrix.length; i++) {
+        console.log(matrix[i].join(' '));
+    }
+}
+
+function transpose_matrix(matrix) {
+    let rows = matrix.length;
+    let cols = matrix[0].length;
+    let transposed = [];
+
+    for (let c = 0; c < cols; c++) {
+        let new_row = [];
+        for (let r = 0; r < rows; r++) {
+            new_row.push(matrix[r][c]);
+        }
+        transposed.push(new_row);
+    }
+
+    return transposed;
+}
+
+function add_matrix(matA, matB) {
+    let rowA = matA.length;
+    let colA = matA[0].length;
+    let rowB = matB.length;
+    let colB = matB[0].length;
+
+    if (rowA !== rowB || colA !== colB) {
+        console.log('Error: matrices provided do not have the same dimensions!');
+        return null;
+    }
+
+    let sum = [];
+
+    for (let i = 0; i < rowA; i++) {
+        let new_sum_row = [];
+        for (let j = 0; j < colA; j++) {
+            new_sum_row.push(matA[i][j] + matB[i][j]);
+        }
+        sum.push(new_sum_row);
+    }
+
+    return sum;
+}
+
+
+function mult_matrix(matA, matB) {
+    let rowA = matA.length;
+    let colA = matA[0].length;
+    let rowB = matB.length;
+    let colB = matB[0].length;
+
+    if (colA !== rowB) {
+        console.log('Error: column and rows of the respective matrices are not compatible!');
+        return null;
+    }
+
+    let product = [];
+
+    for (let i = 0; i < rowA; i++) {
+        let new_product_row = [];
+        for (let j = 0; j < colB; j++) {
+            let mid_sum = 0;
+            for (let k = 0; k < colA; k++) {
+                mid_sum += matA[i][k] * matB[k][j];
+            }
+            new_product_row.push(mid_sum);
+        }
+        product.push(new_product_row);
+    }
+
+    return product;
+}
+
+let this_matrix = read_matrix();
+let this_trn_matrix = transpose_matrix(this_matrix);
+
+print_matrix(this_trn_matrix);
+
+console.log('Enter matrix A: ');
+let thisMatrixA = read_matrix();
+
+console.log('Enter matrix B: ');
+let thisMatrixB = read_matrix();
+
+let sumMatrix = add_matrix(thisMatrixA, thisMatrixB);
+
+console.log('Sum: ');
+print_matrix(sumMatrix);
+
+console.log('Enter matrix C: ');
+let thisMatrixC = read_matrix();
+
+console.log('Enter matrix D: ');
+let thisMatrixD = read_matrix();
+
+let productMatrix = mult_matrix(thisMatrixC, thisMatrixD);
+
+console.log('Product: ');
+print_matrix(productMatrix);
 
