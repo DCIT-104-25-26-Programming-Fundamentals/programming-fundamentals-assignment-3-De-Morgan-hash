@@ -55,3 +55,71 @@
 // =============================================================================
 
 
+const readline = require('readline-sync');
+
+
+function printFib() {
+    let n = parseInt(readline.question('How many terms? '));
+
+    if (isNaN(n) || n <= 0) {
+        console.log('Error: N must be a positive integer.');
+        return;
+    }
+
+    let fib_seq = [];
+
+    if (n >= 1) {
+        fib_seq.push(0);
+    }
+
+    if (n >= 2) {
+        fib_seq.push(1);
+    }
+
+    for (let i = 2; i < n; i++) {
+        let next_fib_num = fib_seq[i - 1] + fib_seq[i - 2];
+        fib_seq.push(next_fib_num);
+    }
+
+    console.log('Fibonacci sequence; ' + fib_seq.join(' '));
+}
+
+
+function check_fibN() {
+    let fib_target = parseInt(readline.question('Enter a number to check: '));
+
+    if (isNaN(fib_target) || fib_target < 0) {
+        console.log('Error: Please enter a valid integer.');
+        return;
+    }
+
+    if (fib_target == 0) {
+        console.log(`${fib_target} is a Fibonacci number.`);
+        return;
+    }
+
+    let fib_start = 0;
+    let fib_cont = 1;
+    let isFib = false;
+
+    while (fib_cont <= fib_target) {
+        if (fib_cont === fib_target) {
+            isFib = true;
+            break;
+        }
+        let next_fib = fib_start + fib_cont;
+        fib_start = fib_cont;
+        fib_cont = next_fib; 
+    }
+
+    if (isFib) {
+        console.log(`${fib_target} is a Fibonacci number.`);
+    }
+    else {
+        console.log(`${fib_target} is NOT a Fibonacci number.`);
+    }
+}
+
+
+printFib();
+check_fibN();
