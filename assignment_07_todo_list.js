@@ -81,4 +81,78 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readline = require('readline-sync');
 
+let all_tasks = [];
+
+function addTask() {
+    let taskinput = readline.question('Enter task: ');
+    all_tasks.push(taskinput);
+    console.log(`Task added: "${taskinput}"`);
+}
+
+function seekTask() {
+    if (all_tasks.length === 0) {
+        console.log('Your to-do list is empty.');
+        return;
+    }
+    console.log('Your Tasks:');
+    for (let i = 0; i < all_tasks.length; i++) {
+        console.log(`${i + 1}. ${all_tasks[i]}`);
+    }
+}
+
+
+function deleteTask() {
+    if (all_tasks.length === 0) {
+        console.log('Your to-do list is empty. Nothing to delete.');
+        return;
+    }
+
+    seekTask();
+    let task_num = parseInt(readline.question('Enter task number to delete: '));
+    let task_index = task_num - 1;
+
+    if (isNaN(task_index) || task_index < 0 || task_index >= all_tasks.length) {
+        console.log('Error: Invalid task number.');
+        return;
+    }
+
+    let rem_task = all_tasks.splice(task_index, 1);
+    console.log(`Task "${rem_task}" has been removed.`);
+}
+
+function TodoMenu() {
+
+    let in_op = true;
+
+    while (in_op) {
+        console.log('1. Add task');
+        console.log('2. View tasks');
+        console.log('3. Delete task');
+        console.log('4. Quit');
+
+        let choice = parseInt(readline.question('Enter your choice (1-4): '));
+
+        switch (choice) {
+            case 1:
+                addTask();
+                break;
+            case 2:
+                seekTask();
+                break;
+            case 3:
+                deleteTask();
+                break;
+            case 4:
+                console.log('Goodbye!');
+                in_op = false;
+                break;
+            default:
+                console.log('Error: Invalid choice. Please enter a number between 1 and 4.');
+        }
+    }
+}
+
+
+TodoMenu();
