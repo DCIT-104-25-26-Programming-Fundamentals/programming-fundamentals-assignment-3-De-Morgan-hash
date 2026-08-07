@@ -75,3 +75,98 @@
 // =============================================================================
 
 
+const readline = require('readline-sync');
+
+
+const add = (a, b) => (a + b);
+const difference = (a, b) => (a - b);
+const product = (a, b) => (a * b);
+
+function division(a, b) {
+    if (b == 0) {
+        console.log('Error: Cannot perform division by zero');
+    }
+
+    return a / b;
+}
+
+function modulus(a, b) {
+    if (b === 0) {
+        console.log('Error: Cannot perform modulus by zero');
+        return null;
+    }
+    
+    return a % b;
+}
+
+const exponent = (a, b) => (a ** b);
+
+
+function Calculator() {
+    let process = true;
+
+    while (process) {
+        console.log('1. Addition');
+        console.log('2. Subtraction');
+        console.log('3. Multiplication');
+        console.log('4. Division');
+        console.log('5. Modulus');
+        console.log('6. Exponentiation');
+        console.log('7. Quit');
+
+        let option = parseInt(readline.question('Select an operation (1-7): '));
+
+        if (option === 7) {
+            console.log('Goodbye!');
+            process = false;
+            break;
+        }
+
+        if (isNaN(option) || option < 1 || option > 7) {
+            console.log('Error: Invalid choice. Please select a number between 1 and 7');
+            continue;
+        }
+
+        let num1 = parseFloat(readline.question('Enter first number: '));
+        let num2 = parseFloat(readline.question('Enter second number: '));
+
+        if (isNaN(num1) || isNaN(num2)) {
+            console.log('Error: please enter valid numbers.');
+            continue;
+        }
+
+        let result = 0;
+
+        switch (option) {
+            case 1: 
+                result = add(num1, num2);
+                console.log(`Result: ${num1} + ${num2} = ${result.toFixed(2)}`);
+                break;
+            case 2:
+                result = difference(num1, num2);
+                console.log(`Result: ${num1} - ${num2} = ${result.toFixed(2)}`);
+                break;
+            case 3:
+                result = product(num1, num2);
+                console.log(`Result: ${num1} * ${num2} = ${result.toFixed(2)}`);
+                break;
+            case 4: 
+                result = division(num1, num2);
+                console.log(`Result: ${num1} / ${num2} = ${result.toFixed(2)}`);
+                break;
+            case 5:
+                result = modulus(num1, num2);
+                console.log(`Result: ${num1} / ${num2} = ${result.toFixed(2)}`);
+                break;
+            case 6:
+                result = exponent(num1, num2);
+                console.log(`Result ${num1} ** ${num2} = ${result.toFixed(2)}`);
+                break;
+        }
+    }
+}
+
+
+
+
+Calculator();
